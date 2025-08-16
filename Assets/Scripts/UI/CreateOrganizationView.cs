@@ -9,20 +9,13 @@ public class CreateOrganizationView : MonoBehaviour
     [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private TMP_Dropdown country;
     [SerializeField] private Toggle academy;
-    [SerializeField] private TMP_Text errorText;
 
     public void Initialize()
     {
         ResetForm();
 
-        if (errorText)
-        {
-            errorText.text = string.Empty;
-        }
-
         if (nameInput)
         {
-            nameInput.onValueChanged.AddListener(OnNameInputChanged);
             nameInput.text = string.Empty;
         }
 
@@ -35,11 +28,6 @@ public class CreateOrganizationView : MonoBehaviour
             country.value = 0;
             country.RefreshShownValue();
         }
-    }
-
-    private void OnNameInputChanged(string newInput)
-    {
-        SetError(string.Empty);
     }
 
     public string GetName() => nameInput.text;
@@ -55,8 +43,6 @@ public class CreateOrganizationView : MonoBehaviour
     {
         if (nameInput)
         {
-            nameInput.onValueChanged.RemoveListener(OnNameInputChanged);
-            nameInput.onValueChanged.AddListener(OnNameInputChanged);
             nameInput.text = string.Empty;
         }
 
@@ -70,23 +56,10 @@ public class CreateOrganizationView : MonoBehaviour
             academy.isOn = false;
         }
 
-        if (errorText)
-        {
-            errorText.text = string.Empty;
-        }
-
         if (country != null)
         {
             country.value = 0;
             country.RefreshShownValue();
-        }
-    }
-
-    public void SetError(string message)
-    {
-        if (errorText)
-        {
-            errorText.text = message ?? string.Empty;
         }
     }
 }

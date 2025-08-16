@@ -77,14 +77,11 @@ public class AppController : MonoBehaviour
             string fullPath = Path.Combine(LogoStorage.PersistentLogosDirectory, currentLogoFileName);
             Texture2D texture2D = TextureLoader.LoadTexture(fullPath);
             createOrganizationView.SetLogoTexture(texture2D);
-            createOrganizationView.SetError(string.Empty);
             Debug.Log($"AppController: Logo uploaded successfully: {currentLogoFileName}");
         }
         catch (System.Exception ex)
         {
-
             Debug.LogError($"AppController: Error uploading logo: {ex.Message}");
-            createOrganizationView.SetError("Failed to load logo");
         }
     }
 
@@ -100,15 +97,11 @@ public class AppController : MonoBehaviour
 
         bool isAcademy = createOrganizationView.GetIsAcademy();
 
-        createOrganizationView.SetError(string.Empty);
-
         var data = OrganizationData.FromForm(createOrganizationView.GetName(),
             createOrganizationView.GetCountryName(), createOrganizationView.GetIsAcademy(),
             currentLogoFileName
         );
         organizations.Add(data);
-
-        createOrganizationView.SetError(string.Empty);
 
         Debug.Log($"AppController: Organization saved with name '{organizationName}', " +
             $"country index {createOrganizationView.GetCountryName()}, " +
