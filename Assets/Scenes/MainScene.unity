@@ -349,6 +349,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: Select country...
+      m_Image: {fileID: 0}
     - m_Text: Afghanistan
       m_Image: {fileID: 0}
     - m_Text: Albania
@@ -932,7 +934,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1252686858}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.71007836
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4603,7 +4605,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 16
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -5138,7 +5140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Afghanistan
+  m_text: Select country...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

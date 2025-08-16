@@ -16,7 +16,7 @@ public class OrganizationView : MonoBehaviour
     public void Bind(OrganizationData organizationData, string logosDirectory)
     {
         nameText.text = organizationData.Name;
-        countryText.text = organizationData.CountryIndex.ToString();
+        countryText.text = organizationData.CountryName;
         academyCheck.SetActive(organizationData.IsAcademy);
 
         var logoPath = Path.Combine(logosDirectory, organizationData.LogoFileName);

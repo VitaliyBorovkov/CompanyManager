@@ -4,26 +4,26 @@ public class OrganizationData
 {
     public string Id;
     public string Name;
-    public int CountryIndex;
+    public string CountryName;
     public bool IsAcademy;
     public string LogoFileName;
 
-    public OrganizationData(string id, string name, int countryIndex, bool isAcademy, string logoFileName)
+    public OrganizationData(string id, string name, string countryName, bool isAcademy, string logoFileName)
     {
         Id = id;
         Name = name;
-        CountryIndex = countryIndex;
+        CountryName = countryName;
         IsAcademy = isAcademy;
         LogoFileName = logoFileName;
     }
 
-    public static OrganizationData FromForm(string name, int countryIndex, bool isAcademy,
+    public static OrganizationData FromForm(string name, string countryName, bool isAcademy,
         string logoFileName)
     {
         return new OrganizationData(
             Guid.NewGuid().ToString(),
             name?.Trim() ?? string.Empty,
-            countryIndex,
+           countryName,
             isAcademy,
             logoFileName
         );

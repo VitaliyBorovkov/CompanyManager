@@ -43,7 +43,7 @@ public class CreateOrganizationView : MonoBehaviour
     }
 
     public string GetName() => nameInput.text;
-    public int GetCountryIndex() => country.value;
+    public string GetCountryName() => country.options[country.value].text;
     public bool GetIsAcademy() => academy.isOn;
 
     public void SetLogoTexture(Texture2D texture2D)

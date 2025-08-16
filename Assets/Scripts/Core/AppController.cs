@@ -103,7 +103,7 @@ public class AppController : MonoBehaviour
         createOrganizationView.SetError(string.Empty);
 
         var data = OrganizationData.FromForm(createOrganizationView.GetName(),
-            createOrganizationView.GetCountryIndex(), createOrganizationView.GetIsAcademy(),
+            createOrganizationView.GetCountryName(), createOrganizationView.GetIsAcademy(),
             currentLogoFileName
         );
         organizations.Add(data);
@@ -111,7 +111,7 @@ public class AppController : MonoBehaviour
         createOrganizationView.SetError(string.Empty);
 
         Debug.Log($"AppController: Organization saved with name '{organizationName}', " +
-            $"country index {createOrganizationView.GetCountryIndex()}, " +
+            $"country index {createOrganizationView.GetCountryName()}, " +
             $"isAcademy: {isAcademy}, logo: {currentLogoFileName}, total: {organizations.Count}");
 
         organizationsListView.Refresh(Organizations);
