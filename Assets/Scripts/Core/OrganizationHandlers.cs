@@ -39,7 +39,6 @@ public class OrganizationHandlers
             string fullPath = Path.Combine(LogoStorage.PersistentLogosDirectory, currentLogoFileName);
             Texture2D texture2D = TextureLoader.LoadTexture(fullPath);
             createOrganizationView.SetLogoTexture(texture2D);
-            Debug.Log($"AppController: Logo uploaded successfully: {currentLogoFileName}");
         }
         catch (System.Exception ex)
         {
@@ -57,17 +56,15 @@ public class OrganizationHandlers
 
         string organizationName = createOrganizationView.GetName();
         string countryName = createOrganizationView.GetCountryName();
-        Sprite countryFlag = createOrganizationView.GetCountryFlag();
+        string countryFlagID = createOrganizationView.GetCountryID();
         bool isAcademy = createOrganizationView.GetIsAcademy();
 
-        var data = OrganizationData.FromForm(organizationName, countryFlag, countryName, isAcademy,
+        var data = OrganizationData.FromForm(organizationName, countryFlagID, countryName, isAcademy,
             currentLogoFileName);
 
         organizations.Add(data);
 
-        Debug.Log($"AppController: Organization saved with name '{organizationName}', " +
-            $"country index {createOrganizationView.GetCountryName()}, " +
-            $"isAcademy: {isAcademy}, logo: {currentLogoFileName}, total: {organizations.Count}");
+        Debug.Log($"AppController: Organization saved.");
 
         organizationsListView.Refresh(organizations);
 

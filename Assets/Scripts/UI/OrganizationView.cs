@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 using TMPro;
@@ -13,6 +14,13 @@ public class OrganizationView : MonoBehaviour
     [SerializeField] private Image countryFlagImage;
     [SerializeField] private TMP_Text countryText;
     [SerializeField] private GameObject academyCheck;
+
+    private CountriesDatabase countriesDatabase;
+
+    private void Awake()
+    {
+        countriesDatabase = Resources.Load<CountriesDatabase>("CountriesDatabase");
+    }
 
     public void Bind(OrganizationData organizationData, string logosDirectory)
     {
@@ -32,13 +40,12 @@ public class OrganizationView : MonoBehaviour
             Debug.LogWarning($"Logo file not found: {logoPath}");
         }
 
-        if (organizationData.CountryFlagFileName != null)
+        if (countriesDatabase != null)
         {
-            countryFlagImage.sprite = organizationData.CountryFlagFileName;
-        }
-        else
-        {
-            countryFlagImage.sprite = null;
+            var country = Array.Find(countriesDatabase.countries,
+                c => c.countryID == organizationData.CountryID);
+
+            countryFlagImage.sprite = country != null ? country.countryFlag : null;
         }
     }
 }

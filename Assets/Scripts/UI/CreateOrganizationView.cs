@@ -10,23 +10,28 @@ public class CreateOrganizationView : MonoBehaviour
     [SerializeField] private TMP_Dropdown country;
     [SerializeField] private Toggle academy;
 
+    private CountriesDatabase countriesDatabase;
+
     public void Initialize()
     {
         ResetForm();
 
+        countriesDatabase = Resources.Load<CountriesDatabase>("CountriesDatabase");
+
+        if (country != null && countriesDatabase != null)
+        {
+            country.options.Clear();
+            foreach (var c in countriesDatabase.countries)
+            {
+                country.options.Add(new TMP_Dropdown.OptionData(c.countryName, c.countryFlag));
+            }
+            country.value = 0;
+            country.RefreshShownValue();
+        }
+
         if (nameInput)
         {
             nameInput.text = string.Empty;
-        }
-
-        if (country != null && country.options.Count == 0)
-        {
-            country.options.Add(new TMP_Dropdown.OptionData("Select Country"));
-            country.options.Add(new TMP_Dropdown.OptionData("USA"));
-            country.options.Add(new TMP_Dropdown.OptionData("Canada"));
-            country.options.Add(new TMP_Dropdown.OptionData("UK"));
-            country.value = 0;
-            country.RefreshShownValue();
         }
     }
 
@@ -34,13 +39,14 @@ public class CreateOrganizationView : MonoBehaviour
     public string GetCountryName() => country.options[country.value].text;
     public bool GetIsAcademy() => academy.isOn;
 
-    public Sprite GetCountryFlag()
+    public string GetCountryID()
     {
-        if (country != null && country.value >= 0 && country.value < country.options.Count)
+        if (countriesDatabase != null && country.value >= 0 && country.value < countriesDatabase.countries.Length)
         {
-            return country.options[country.value].image;
+            return countriesDatabase.countries[country.value].countryID;
         }
-        return null;
+
+        return string.Empty;
     }
 
     public void SetLogoTexture(Texture2D texture2D)

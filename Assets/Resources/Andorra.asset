@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac140a9c9fb642147b05d93641f14a05, type: 3}
-  m_Name: Albania
+  m_Name: Andorra
   m_EditorClassIdentifier: 
-  countryName: Albania
-  countryFlag: {fileID: 21300000, guid: 1209fd6205313fa4da1522d125396725, type: 3}
+  countryID: Andorra
+  countryName: Andorra
+  countryFlag: {fileID: 21300000, guid: c3108b7669d065e46a38edaa47fd2bf0, type: 3}

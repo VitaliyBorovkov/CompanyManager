@@ -67,7 +67,7 @@ public class AppController : MonoBehaviour
         {
             buttonsOnCreateScreenView.OnUploadClicked -= organizationHandlers.HandleUploadClicked;
             buttonsOnCreateScreenView.OnSaveClicked -= organizationHandlers.HandleSaveClicked;
-            buttonsOnCreateScreenView.OnNextClicked -= null;
+            buttonsOnCreateScreenView.OnNextClicked -= () => organizationHandlers.HandleNextClicked(navigationController); ;
         }
 
         SaveLoadService.SaveProgress(organizations);

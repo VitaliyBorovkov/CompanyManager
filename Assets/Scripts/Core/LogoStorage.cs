@@ -39,9 +39,7 @@ public static class LogoStorage
 
         string destinationPathInAssets = Path.Combine(assetsPath, fileName);
         File.Copy(logoPath, destinationPathInAssets, overwrite: true);
-        Debug.Log($"LogoStorage: Copied to Assets/ImportedLogos/{fileName}");
 #endif
-        Debug.Log($"LogoStorage: Logo copied to {destinationPathPersistent}");
         return fileName;
     }
 }
