@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CountriesDatabase
   m_EditorClassIdentifier: 
   countries:
+  - {fileID: 11400000, guid: 0e21c6ed15fe9db4b89684b718eda4e9, type: 2}
   - {fileID: 11400000, guid: 7fe92d862a2eb7e47a54c0cc89465522, type: 2}
   - {fileID: 11400000, guid: 052280c9b45c6ba42a605b2d0873d705, type: 2}
   - {fileID: 11400000, guid: 6cadac41e79591c4d86ab075937fe43a, type: 2}
