@@ -31,7 +31,7 @@ public class FormFieldValidator : MonoBehaviour, IValidatable
 
         if (dropdown != null)
         {
-            return dropdown.value >= 0;
+            return dropdown.value > 0;
         }
 
         return true;
