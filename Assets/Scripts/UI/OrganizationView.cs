@@ -10,6 +10,7 @@ public class OrganizationView : MonoBehaviour
 
     [SerializeField] private RawImage logo;
     [SerializeField] private TMP_Text nameText;
+    //[SerializeField] private Image countryFlagImage;
     [SerializeField] private TMP_Text countryText;
     [SerializeField] private GameObject academyCheck;
 
@@ -30,5 +31,14 @@ public class OrganizationView : MonoBehaviour
             logo.texture = null;
             Debug.LogWarning($"Logo file not found: {logoPath}");
         }
+
+        //if (organizationData.CountryFlagFileName != null)
+        //{
+        //    countryFlagImage.sprite = organizationData.CountryFlagFileName;
+        //}
+        //else
+        //{
+        //    countryFlagImage.sprite = null;
+        //}
     }
 }

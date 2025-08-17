@@ -94,13 +94,13 @@ public class AppController : MonoBehaviour
         }
 
         string organizationName = createOrganizationView.GetName();
-
+        string countryName = createOrganizationView.GetCountryName();
+        Sprite countryFlag = createOrganizationView.GetCountryFlag();
         bool isAcademy = createOrganizationView.GetIsAcademy();
 
-        var data = OrganizationData.FromForm(createOrganizationView.GetName(),
-            createOrganizationView.GetCountryName(), createOrganizationView.GetIsAcademy(),
-            currentLogoFileName
-        );
+        var data = OrganizationData.FromForm(organizationName, countryFlag, countryName, isAcademy,
+            currentLogoFileName);
+
         organizations.Add(data);
 
         Debug.Log($"AppController: Organization saved with name '{organizationName}', " +

@@ -8,5 +8,4 @@ public class CountryData : ScriptableObject
 {
     public string countryName;
     public Sprite countryFlag;
-
 }

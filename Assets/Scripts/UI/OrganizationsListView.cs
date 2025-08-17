@@ -73,23 +73,6 @@ public class OrganizationsListView : MonoBehaviour
         }
     }
 
-    //public void Refresh(IReadOnlyList<OrganizationData> items)
-    //{
-    //    int count = items?.Count ?? 0;
-    //    int show = Mathf.Min(count, pool.Count);
-    //    for (int i = 0; i < pool.Count; i++)
-    //    {
-    //        bool active = i < show;
-    //        pool[i].gameObject.SetActive(true);
-    //        if (active)
-    //        {
-    //            pool[i].Bind(items[i], logosDirectory);
-    //        }
-    //    }
-
-    //    scrollView.verticalNormalizedPosition = 1f;
-    //}
-
     public void Refresh(IReadOnlyList<OrganizationData> data)
     {
         SetItem(data);
