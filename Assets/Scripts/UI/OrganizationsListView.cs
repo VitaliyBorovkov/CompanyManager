@@ -76,7 +76,6 @@ public class OrganizationsListView : MonoBehaviour
     public void Refresh(IReadOnlyList<OrganizationData> data)
     {
         SetItem(data);
-        Debug.Log("OrganizationsListView: Data refreshed.");
     }
 
     private void SetItem(IReadOnlyList<OrganizationData> data)
