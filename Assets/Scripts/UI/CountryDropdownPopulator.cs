@@ -6,7 +6,6 @@ public class CountryDropdownPopulator : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown dropdown;
     [SerializeField] private CountriesDatabase countriesDatabase;
-    //[SerializeField] private GameObject optionPrefab;
 
     private void Start()
     {
