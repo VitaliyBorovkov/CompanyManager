@@ -34,6 +34,15 @@ public class CreateOrganizationView : MonoBehaviour
     public string GetCountryName() => country.options[country.value].text;
     public bool GetIsAcademy() => academy.isOn;
 
+    public Sprite GetCountryFlag()
+    {
+        if (country != null && country.value >= 0 && country.value < country.options.Count)
+        {
+            return country.options[country.value].image;
+        }
+        return null;
+    }
+
     public void SetLogoTexture(Texture2D texture2D)
     {
         logo.texture = texture2D;
