@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 
 using UnityEngine;
 
@@ -18,12 +18,11 @@ public class AppController : MonoBehaviour
 
     private NavigationController navigationController;
     private OrganizationHandlers organizationHandlers;
+    private OrganizationRepository organizationRepository;
 
     private IFilePicker filePicker;
-    private string currentLogoFileName;
 
-    private readonly List<OrganizationData> organizations = new List<OrganizationData>();
-    public IReadOnlyList<OrganizationData> Organizations => organizations;
+    private Action onNextHandler;
 
     private void Awake()
     {
@@ -31,34 +30,34 @@ public class AppController : MonoBehaviour
 
         mainMenuView.Initialize(navigationController);
         createBackButtonView.Initialize(navigationController);
-        createOrganizationView.Initialize();
         buttonsOnCreateScreenView.Initialize(navigationController);
         chooseBackButtonView.Initialize(navigationController);
+        createOrganizationView.Initialize();
         organizationsListView.Initialize(LogoStorage.PersistentLogosDirectory);
-
-
 
 #if UNITY_EDITOR
         filePicker = new EditorFilePicker();
 #else
         filePicker = new RuntimeFilePicker();
 #endif
-        var saveData = SaveLoadService.Load();
-        organizations.Clear();
-        organizations.AddRange(saveData.organizations);
 
-        organizationsListView.Refresh(Organizations);
+        organizationRepository = new OrganizationRepository();
+        organizationRepository.Load();
+
+        organizationsListView.Refresh(organizationRepository.Organizations);
 
         organizationHandlers = new OrganizationHandlers(filePicker, createOrganizationView, formValidator,
-             organizationsListView, organizations
+             organizationsListView, organizationRepository
         );
+
+        onNextHandler = () => organizationHandlers.HandleNextClicked(navigationController);
 
         buttonsOnCreateScreenView.OnUploadClicked += organizationHandlers.HandleUploadClicked;
         buttonsOnCreateScreenView.OnSaveClicked += organizationHandlers.HandleSaveClicked;
-        buttonsOnCreateScreenView.OnNextClicked += () => organizationHandlers.HandleNextClicked(navigationController);
+        buttonsOnCreateScreenView.OnNextClicked += onNextHandler;
 
-        navigationController.ShowMain();
-        Debug.Log("AppController: Navigation initialized.");
+        navigationController.Show(WindowType.MainMenu);
+        //Debug.Log("AppController: Navigation initialized.");
     }
 
     private void OnDestroy()
@@ -67,9 +66,9 @@ public class AppController : MonoBehaviour
         {
             buttonsOnCreateScreenView.OnUploadClicked -= organizationHandlers.HandleUploadClicked;
             buttonsOnCreateScreenView.OnSaveClicked -= organizationHandlers.HandleSaveClicked;
-            buttonsOnCreateScreenView.OnNextClicked -= () => organizationHandlers.HandleNextClicked(navigationController); ;
+            buttonsOnCreateScreenView.OnNextClicked -= onNextHandler;
         }
 
-        SaveLoadService.SaveProgress(organizations);
+        organizationRepository.Save();
     }
 }

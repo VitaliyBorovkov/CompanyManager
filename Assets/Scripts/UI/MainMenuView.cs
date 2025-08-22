@@ -11,7 +11,7 @@ public class MainMenuView : MonoBehaviour
     public void Initialize(NavigationController navigationController)
     {
         navigation = navigationController;
-        createButton.onClick.AddListener(() => navigation.ShowCreate());
-        chooseButton.onClick.AddListener(() => navigation.ShowChoose());
+        createButton.onClick.AddListener(() => navigation.Show(WindowType.CreateOrganization));
+        chooseButton.onClick.AddListener(() => navigation.Show(WindowType.ChooseOrganization));
     }
 }

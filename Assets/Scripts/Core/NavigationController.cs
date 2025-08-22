@@ -1,36 +1,26 @@
+using System.Collections.Generic;
+
 using UnityEngine;
 
 public class NavigationController
 {
-    private readonly GameObject main;
-    private readonly GameObject create;
-    private readonly GameObject choose;
+    private readonly Dictionary<WindowType, GameObject> windows;
 
-    public NavigationController(GameObject main, GameObject create, GameObject choose)
+    public NavigationController(GameObject mainMenu, GameObject createOrganization, GameObject chooseOrganization)
     {
-        this.main = main;
-        this.create = create;
-        this.choose = choose;
+        windows = new Dictionary<WindowType, GameObject>
+        {
+            { WindowType.MainMenu, mainMenu },
+            { WindowType.CreateOrganization, createOrganization },
+            { WindowType.ChooseOrganization, chooseOrganization }
+        };
     }
 
-    public void ShowMain()
+    public void Show(WindowType windowType)
     {
-        main.SetActive(true);
-        create.SetActive(false);
-        choose.SetActive(false);
-    }
-
-    public void ShowCreate()
-    {
-        main.SetActive(false);
-        create.SetActive(true);
-        choose.SetActive(false);
-    }
-
-    public void ShowChoose()
-    {
-        main.SetActive(false);
-        create.SetActive(false);
-        choose.SetActive(true);
+        foreach (var window in windows)
+        {
+            window.Value.SetActive(window.Key == windowType);
+        }
     }
 }
