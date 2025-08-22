@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 
 using UnityEngine;
@@ -9,18 +8,18 @@ public class OrganizationHandlers
     private readonly CreateOrganizationView createOrganizationView;
     private readonly FormValidator formValidator;
     private readonly OrganizationsListView organizationsListView;
-    private readonly List<OrganizationData> organizations;
+    private readonly OrganizationRepository organizationRepository;
     private string currentLogoFileName;
 
     public OrganizationHandlers(IFilePicker filePicker, CreateOrganizationView createOrganizationView,
         FormValidator formValidator, OrganizationsListView organizationsListView,
-        List<OrganizationData> organizations)
+        OrganizationRepository organizationRepository)
     {
         this.filePicker = filePicker;
         this.createOrganizationView = createOrganizationView;
         this.formValidator = formValidator;
         this.organizationsListView = organizationsListView;
-        this.organizations = organizations;
+        this.organizationRepository = organizationRepository;
     }
 
     public void HandleUploadClicked()
@@ -28,7 +27,7 @@ public class OrganizationHandlers
         var source = filePicker?.OpenImageFile();
         if (string.IsNullOrEmpty(source))
         {
-            Debug.LogWarning("AppController: No file selected.");
+            Debug.LogWarning("HandleUploadClicked: No file selected.");
             return;
         }
 
@@ -42,7 +41,7 @@ public class OrganizationHandlers
         }
         catch (System.Exception ex)
         {
-            Debug.LogError($"AppController: Error uploading logo: {ex.Message}");
+            Debug.LogError($"OrganizationHandlers: Error uploading logo: {ex.Message}");
         }
     }
 
@@ -50,7 +49,7 @@ public class OrganizationHandlers
     {
         if (!formValidator.Validate())
         {
-            Debug.LogWarning("AppController: Validation failed.");
+            Debug.LogWarning("OrganizationHandlers: Validation failed.");
             return;
         }
 
@@ -62,19 +61,19 @@ public class OrganizationHandlers
         var data = OrganizationData.FromForm(organizationName, countryFlagID, countryName, isAcademy,
             currentLogoFileName);
 
-        organizations.Add(data);
+        organizationRepository.AddOrganization(data);
 
-        Debug.Log($"AppController: Organization saved.");
+        Debug.Log($"HandleSaveClicked: Organization saved.");
 
-        organizationsListView.Refresh(organizations);
+        organizationsListView.Refresh(organizationRepository.Organizations);
 
-        SaveLoadService.SaveProgress(organizations);
+        organizationRepository.Save();
     }
 
     public void HandleNextClicked(NavigationController navigationController)
     {
-        organizationsListView.Refresh(organizations);
-        navigationController.ShowChoose();
+        organizationsListView.Refresh(organizationRepository.Organizations);
+        navigationController.Show(WindowType.ChooseOrganization);
         Debug.Log("HandleNextClicked: Proceeding to next step...");
     }
 }

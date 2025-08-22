@@ -16,13 +16,13 @@ public class BackButtonView : MonoBehaviour
             switch (backTarget)
             {
                 case BackTarget.MainMenuScreen:
-                    navigation.ShowMain();
+                    navigation.Show(WindowType.MainMenu);
                     break;
                 case BackTarget.CreateOrganizationScreen:
-                    navigation.ShowCreate();
+                    navigation.Show(WindowType.CreateOrganization);
                     break;
                 case BackTarget.ChooseOrganizationScreen:
-                    navigation.ShowChoose();
+                    navigation.Show(WindowType.ChooseOrganization);
                     break;
             }
         });
