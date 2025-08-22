@@ -21,7 +21,7 @@ public class AppController : MonoBehaviour
     private OrganizationRepository organizationRepository;
 
     private IFilePicker filePicker;
-
+    private EventBinder eventBinder;
     private Action onNextHandler;
 
     private void Awake()
@@ -31,7 +31,7 @@ public class AppController : MonoBehaviour
         UIInitializer uiInitializer = new UIInitializer();
         uiInitializer.Initialize(navigationController, mainMenuView, createBackButtonView,
             createOrganizationView, buttonsOnCreateScreenView, chooseBackButtonView);
-        createOrganizationView.Initialize();
+
         organizationsListView.Initialize(LogoStorage.PersistentLogosDirectory);
 
         filePicker = FilePickerService.Create();
@@ -45,11 +45,9 @@ public class AppController : MonoBehaviour
              organizationsListView, organizationRepository
         );
 
-        onNextHandler = () => organizationHandlers.HandleNextClicked(navigationController);
-
-        buttonsOnCreateScreenView.OnUploadClicked += organizationHandlers.HandleUploadClicked;
-        buttonsOnCreateScreenView.OnSaveClicked += organizationHandlers.HandleSaveClicked;
-        buttonsOnCreateScreenView.OnNextClicked += onNextHandler;
+        eventBinder = new EventBinder();
+        eventBinder.Bind(buttonsOnCreateScreenView, organizationHandlers, navigationController,
+            out onNextHandler);
 
         navigationController.Show(WindowType.MainMenu);
         //Debug.Log("AppController: Navigation initialized.");
@@ -57,12 +55,7 @@ public class AppController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (buttonsOnCreateScreenView != null)
-        {
-            buttonsOnCreateScreenView.OnUploadClicked -= organizationHandlers.HandleUploadClicked;
-            buttonsOnCreateScreenView.OnSaveClicked -= organizationHandlers.HandleSaveClicked;
-            buttonsOnCreateScreenView.OnNextClicked -= onNextHandler;
-        }
+        eventBinder.Unbind(buttonsOnCreateScreenView, organizationHandlers, onNextHandler);
 
         organizationRepository.Save();
     }
