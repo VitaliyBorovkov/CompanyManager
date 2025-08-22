@@ -28,21 +28,13 @@ public class AppController : MonoBehaviour
     {
         navigationController = new NavigationController(screenMainMenu, screenCreate, screenChoose);
 
-        //mainMenuView.Initialize(navigationController);
-        //createBackButtonView.Initialize(navigationController);
-        //buttonsOnCreateScreenView.Initialize(navigationController);
-        //chooseBackButtonView.Initialize(navigationController);
         UIInitializer uiInitializer = new UIInitializer();
         uiInitializer.Initialize(navigationController, mainMenuView, createBackButtonView,
             createOrganizationView, buttonsOnCreateScreenView, chooseBackButtonView);
         createOrganizationView.Initialize();
         organizationsListView.Initialize(LogoStorage.PersistentLogosDirectory);
 
-#if UNITY_EDITOR
-        filePicker = new EditorFilePicker();
-#else
-        filePicker = new RuntimeFilePicker();
-#endif
+        filePicker = FilePickerService.Create();
 
         organizationRepository = new OrganizationRepository();
         organizationRepository.Load();
