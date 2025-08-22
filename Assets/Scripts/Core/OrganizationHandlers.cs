@@ -63,7 +63,7 @@ public class OrganizationHandlers
 
         organizationRepository.AddOrganization(data);
 
-        Debug.Log($"HandleSaveClicked: Organization saved.");
+        //Debug.Log($"HandleSaveClicked: Organization saved.");
 
         organizationsListView.Refresh(organizationRepository.Organizations);
 
@@ -74,6 +74,6 @@ public class OrganizationHandlers
     {
         organizationsListView.Refresh(organizationRepository.Organizations);
         navigationController.Show(WindowType.ChooseOrganization);
-        Debug.Log("HandleNextClicked: Proceeding to next step...");
+        //Debug.Log("HandleNextClicked: Proceeding to next step...");
     }
 }

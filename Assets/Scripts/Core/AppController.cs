@@ -28,10 +28,13 @@ public class AppController : MonoBehaviour
     {
         navigationController = new NavigationController(screenMainMenu, screenCreate, screenChoose);
 
-        mainMenuView.Initialize(navigationController);
-        createBackButtonView.Initialize(navigationController);
-        buttonsOnCreateScreenView.Initialize(navigationController);
-        chooseBackButtonView.Initialize(navigationController);
+        //mainMenuView.Initialize(navigationController);
+        //createBackButtonView.Initialize(navigationController);
+        //buttonsOnCreateScreenView.Initialize(navigationController);
+        //chooseBackButtonView.Initialize(navigationController);
+        UIInitializer uiInitializer = new UIInitializer();
+        uiInitializer.Initialize(navigationController, mainMenuView, createBackButtonView,
+            createOrganizationView, buttonsOnCreateScreenView, chooseBackButtonView);
         createOrganizationView.Initialize();
         organizationsListView.Initialize(LogoStorage.PersistentLogosDirectory);
 
